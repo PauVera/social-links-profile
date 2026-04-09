@@ -82,7 +82,7 @@
         --clr-text-hover: var(--clr-grey-800);
 
         --ff-base: "Inter", sans-serif;
-        --fs-base: var(--fs-xxs);     /*12px*/
+        --fs-base: var(--fs-xxs);     /*14px*/
         --fs-title: var(--fs-l);    /*20px*/   
         --text-regular: var(--fw-400);
         --text-semi-bold: var(--fw-600);
