@@ -1,3 +1,18 @@
+@font-face {
+    font-family: "Inter";
+    src: url(/assets/fonts/Inter-VariableFont_slnt\,wght.ttf) format("truetype");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+/*
+    NOTAS:    
+    - Los breakpoints de la maqueta son 375px y 1440px
+    - Como no tengo acceso al archivo Figma no tengo el tamaño de fuente para los diferentes elementos de texto, solo el base (14px)
+    - Tampoco tengo acceso al tamaño de los espaciados, ni line-height, ni letter-spacing (si es que hay, pero los desafíos anteriores lo tenían así que tal vez?)
+*/
+
 @layer reset, tokens, base, components, utilities;
 
 @layer reset {
@@ -11,6 +26,18 @@
         margin: 0;
     }
 
+    a {
+        color: currentColor;
+        text-decoration: none;
+    }
+
+    ul[class],
+    ol[class] {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
     img {
         max-width: 100%;
         display: block;
@@ -19,7 +46,69 @@
 
 @layer tokens {
     :root {
-        
+        /*Primitive*/
+        --clr-green: hsl(75, 94%, 57%);
+        --clr-white: hsl(0, 0%, 100%);
+        --clr-grey-700: hsl(0, 0%, 20%);
+        --clr-grey-800: hsl(0, 0%, 12%);
+        --clr-grey-900: hsl(0, 0%, 8%);
+
+        --fw-400: 400;
+        --fw-600: 600;
+        --fw-700: 700;
+
+        --fs-xxs: 0.875rem;  /*14px*/
+        --fs-xs: 1rem;   /*16px*/        
+        --fs-l: 1.25rem;    /*20px*/
+        --fs-xl: 1.375rem;     /*22px*/
+
+        --sp-s: 0.5rem;     /*8px*/
+        --sp-m: 0.75rem;    /*12px*/
+        --sp-l: 1rem;     /*16px*/
+        --sp-xl: 1.5rem;      /*24px*/
+        --sp-xxl: 2.5rem;      /*40px*/
+       
+        --border-radius-s: 0.5rem;
+        --border-radius-m: 0.625rem; 
+        --border-radius-xxl: 50%; 
+
+        /*Semantic*/
+        --bg-body: var(--clr-grey-900);
+        --bg-surface: var(--clr-grey-800);
+        --bg-btn: var(--clr-grey-700);
+
+        --clr-text-base: var(--clr-white);
+        --clr-accent: var(--clr-green);
+        --clr-text-hover: var(--clr-grey-800);
+
+        --ff-base: "Inter", sans-serif;
+        --fs-base: var(--fs-xxs);     /*12px*/
+        --fs-title: var(--fs-l);    /*20px*/   
+        --text-regular: var(--fw-400);
+        --text-semi-bold: var(--fw-600);
+        --text-bold: var(--fw-700);
+
+        --border-radius-card: var(--border-radius-m);   
+        --border-radius-btn: var(--border-radius-s);   
+        --border-radius-avatar: var(--border-radius-xxl);   
+
+        --padding-card: var(--sp-xl);
+        --padding-btn-block: var(--sp-m);
+        --padding-btn-inline: var(--sp-l);
+        --gap-card: var(--sp-xl);
+        --gap-header: var(--sp-xl);
+        --gap-persona-info: var(--sp-s);
+        --gap-list: var(--sp-m);
+        --card-max-width: 18.75rem;
+    }
+
+    @media(min-width: 900px) {
+        :root {
+            --fs-base: var(--fs-xs);     
+            --fs-title: var(--fs-xl);
+            --padding-card: var(--sp-xxl);
+            --card-max-width: 21.875rem; 
+        }
     }
 }
 
@@ -28,24 +117,80 @@
         min-height: 100svh;
         display: grid;
         place-items: center;
-    }
-    
-    a {
-        color: currentColor;
-        text-decoration: none;
+
+        padding-inline: 12px;
+
+        font-family: var(--ff-base);
+        font-size: var(--fs-base);
+
+        background-color: var(--bg-body);
+        color: var(--clr-text-base);
     }
 
     a:hover {
-        
+        color: var(--clr-text-hover);
     }
 
     a:focus-visible {
-        
+        outline: 2px solid var(--clr-accent);
+        outline-offset: 2px;
     }
 }
 
 @layer components {
+    .socials-card {
+        max-width: var(--card-max-width);
+        width: 100%;
+        padding: var(--padding-card);
+        gap: var(--gap-card);
+        background-color: var(--bg-surface);
+        border-radius: var(--border-radius-card);
+        text-align: center;
+    }
+
+    .socials-card__persona {
+        gap: var(--gap-header);
+    }
     
+    .socials-card__avatar {
+        width: 80px;
+        aspect-ratio: 1;
+        margin-inline: auto;
+        border-radius: var(--border-radius-avatar);
+    }
+
+    .socials-card__persona-info {
+        gap: var(--gap-persona-info);
+    }
+
+    .socials-card__name {
+        font-size: var(--fs-title);
+        font-weight: var(--text-semi-bold);
+    }
+    
+    .socials-card__location {
+        font-weight: var(--text-bold);
+        color: var(--clr-accent);
+    }
+   
+    .socials-card__list {
+        width: 100%;
+        gap: var(--gap-list);
+    }    
+    
+    .socials-card__list-link {
+        display: block;
+        padding-inline: var(--padding-btn-inline);
+        padding-block: var(--padding-btn-block);
+
+        font-weight: var(--text-semi-bold);
+        background-color: var(--bg-btn);
+        border-radius: var(--border-radius-btn);
+    }
+
+    .socials-card__list-link:hover {
+        background-color: var(--clr-accent);
+    }
 }
 
 @layer utilities {
@@ -59,5 +204,10 @@
         clip: rect(0 0 0 0);
         white-space: nowrap;
         border: 0;
+    }
+
+    .flex-col {
+        display: flex;
+        flex-direction: column;
     }
 }
